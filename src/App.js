@@ -8,6 +8,8 @@ import {
   Typography,
   Divider,
   Paper,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapIcon from "@mui/icons-material/Map";
@@ -15,6 +17,15 @@ import PhoneIcon from "@mui/icons-material/Phone";
 
 const Gallery = () => {
   const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const [open, setOpen] = React.useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleClose();
+    }, 4000);
+  }, []);
   const photoPaths = Array.from(
     { length: 28 },
     (_, i) => `/assets/${i + 1}.jpg`
@@ -153,6 +164,13 @@ const Gallery = () => {
           ></iframe>
         </div>
       </Box>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Box>
   );
 };
