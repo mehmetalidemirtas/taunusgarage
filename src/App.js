@@ -24,7 +24,7 @@ const Gallery = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleClose();
-    }, 4000);
+    }, 6000);
   }, []);
   const photoPaths = Array.from(
     { length: 28 },
