@@ -70,7 +70,12 @@ const Gallery = () => {
       <Box sx={topAreaStyle}>
         <div style={backgroundStyle} />
         <div style={centerTextStyle}>
-          <Typography variant="h3" color="white" fontStyle={"italic"}>
+          <Typography
+            variant="h3"
+            color="white"
+            fontStyle={"italic"}
+            fontWeight={800}
+          >
             DEMİRCİ TAUNUS GARAGE
           </Typography>
           <Box sx={{ marginTop: "10px" }}>
