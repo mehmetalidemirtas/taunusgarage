@@ -7,6 +7,7 @@ import {
   Box,
   Typography,
   Divider,
+  Paper,
 } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapIcon from "@mui/icons-material/Map";
@@ -107,6 +108,18 @@ const Gallery = () => {
         </div>
       </Box>
       <Container maxWidth={"xl"}>
+        <Box sx={{ padding: "15px", marginTop: "15px" }}>
+          <Typography variant="h6">İLETİŞİM</Typography>
+          <Divider />
+        </Box>
+        <Box sx={{ padding: "15px", pt: 0 }}>
+          <Typography>Mehmet Ali Demirci</Typography>
+          <Typography>Telefon Numarası: +90 536 761 12 13</Typography>
+          <Typography>
+            Çankaya, İstiklal Cd. Armoni İş Merkezi No:7 D:14, 33070
+            Akdeniz/Mersin (İçel)
+          </Typography>
+        </Box>
         <Box sx={{ padding: "15px", marginTop: "15px" }}>
           <Typography variant="h6">FOTOĞRAFLAR</Typography>
           <Divider />
