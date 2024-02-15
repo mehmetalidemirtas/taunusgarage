@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Grid,
   Card,
@@ -6,16 +6,31 @@ import {
   Container,
   Box,
   Typography,
+  Divider,
 } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapIcon from "@mui/icons-material/Map";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 const Gallery = () => {
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const photoPaths = Array.from(
+    { length: 28 },
+    (_, i) => `/assets/${i + 1}.jpg`
+  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBackgroundIndex((prevIndex) => (prevIndex + 1) % photoPaths.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [photoPaths.length]);
+
   const topAreaStyle = {
     height: "calc(100vh)",
     position: "relative",
-    marginBottom: "15px",
+    backgroundImage: `url(${photoPaths[backgroundIndex]})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
   };
 
   const backgroundStyle = {
@@ -24,19 +39,17 @@ const Gallery = () => {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundImage: "url('/assets/1.jpg')",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     backgroundSize: "cover",
     backgroundPosition: "center center",
   };
 
-  const contentStyle = {
+  const centerTextStyle = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center",
-    color: "white",
-    zIndex: 1,
   };
 
   const mapRef = useRef(null);
@@ -45,10 +58,6 @@ const Gallery = () => {
     mapRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const photoPaths = Array.from(
-    { length: 27 },
-    (_, i) => `/assets/${i + 1}.jpg`
-  );
   const redirectToFacebook = () => {
     window.open("https://www.facebook.com/groups/1287813332059338", "_blank");
   };
@@ -58,54 +67,53 @@ const Gallery = () => {
 
   return (
     <Box sx={{ backgroundColor: "#f7f7f7" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "#f2f2f2",
-          padding: "15px",
-        }}
-      >
-        <Box>
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            fontStyle={"italic"}
-            color={"#12372A"}
-          >
-            TAUNUS GARAGE
-          </Typography>
-        </Box>
-        <Box>
-          <PhoneIcon
-            sx={{ marginRight: "10px", cursor: "pointer" }}
-            onClick={handlePhoneClick}
-          />
-
-          <MapIcon
-            sx={{ marginRight: "10px", cursor: "pointer" }}
-            onClick={scrollToMap}
-          />
-          <FacebookIcon
-            sx={{ cursor: "pointer" }}
-            onClick={redirectToFacebook}
-          />
-        </Box>
-      </Box>
       <Box sx={topAreaStyle}>
         <div style={backgroundStyle} />
+        <div style={centerTextStyle}>
+          <Typography variant="h3" color="white" fontStyle={"italic"}>
+            DEMİRCİ TAUNUS GARAGE
+          </Typography>
+          <Box sx={{ marginTop: "10px" }}>
+            <PhoneIcon
+              sx={{
+                marginRight: "10px",
+                cursor: "pointer",
+                color: "#dedede",
+                fontSize: "40px",
+              }}
+              fontSize="50px"
+              onClick={handlePhoneClick}
+            />
+
+            <MapIcon
+              sx={{
+                marginRight: "10px",
+                cursor: "pointer",
+                color: "#dedede",
+                fontSize: "40px",
+              }}
+              onClick={scrollToMap}
+            />
+            <FacebookIcon
+              sx={{ cursor: "pointer", color: "#dedede", fontSize: "40px" }}
+              onClick={redirectToFacebook}
+            />
+          </Box>
+        </div>
       </Box>
       <Container maxWidth={"xl"}>
+        <Box sx={{ padding: "15px", marginTop: "15px" }}>
+          <Typography variant="h6">FOTOĞRAFLAR</Typography>
+          <Divider />
+        </Box>
         <Grid container spacing={2}>
           {photoPaths.map((photoPath, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-              <Card>
+            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+              <Card elevation={2}>
                 <CardMedia
                   component="img"
                   height="auto"
-                  sx={{ maxHeight: "600px" }}
+                  sx={{ maxHeight: "500px", padding: 1 }}
                   src={photoPath}
                   alt={`Photo ${index + 1}`}
                 />
