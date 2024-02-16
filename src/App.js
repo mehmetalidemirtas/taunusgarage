@@ -14,10 +14,64 @@ import {
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapIcon from "@mui/icons-material/Map";
 import PhoneIcon from "@mui/icons-material/Phone";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
 
 const Gallery = () => {
   const [backgroundIndex, setBackgroundIndex] = useState(0);
   const [open, setOpen] = React.useState(true);
+  const storage = getStorage();
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const imageRefs = await listAll(ref(storage, "images"));
+        const imageURLs = await Promise.all(
+          imageRefs.items.map(async (imageRef) => {
+            return await getDownloadURL(imageRef);
+          })
+        );
+        setImages(imageURLs);
+      } catch (error) {
+        console.error("Mevcut resimleri alma hatası:", error);
+      }
+    };
+
+    fetchImages();
+  }, []);
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleUpload = () => {
+    const storageRef = ref(storage, `images/${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.error("Resim yükleme hatası:", error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("Dosya yüklendi. İndirme URL'si:", downloadURL);
+          setImageUrl(downloadURL);
+        });
+      }
+    );
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -131,11 +185,27 @@ const Gallery = () => {
             Akdeniz/Mersin (İçel)
           </Typography>
         </Box>
+        <input type="file" onChange={handleImageChange} />
+        <button onClick={handleUpload}>Resmi Yükle</button>
+
         <Box sx={{ padding: "15px", marginTop: "15px" }}>
           <Typography variant="h6">FOTOĞRAFLAR</Typography>
           <Divider />
         </Box>
         <Grid container spacing={2}>
+          {images.map((photoPath, index) => (
+            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+              <Card elevation={2}>
+                <CardMedia
+                  component="img"
+                  height="auto"
+                  sx={{ maxHeight: "500px", padding: 1 }}
+                  src={photoPath}
+                  alt={`Photo ${index + 1}`}
+                />
+              </Card>
+            </Grid>
+          ))}
           {photoPaths.map((photoPath, index) => (
             <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
               <Card elevation={2}>
