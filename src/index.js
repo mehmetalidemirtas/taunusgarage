@@ -10,18 +10,18 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig"; // firebaseConfig dosyanızı projenize uygun şekilde import edin
 import UploadImage from "./UploadImage";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 initializeApp(firebaseConfig);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/yukle" element={<UploadImage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
