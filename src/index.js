@@ -10,6 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig"; // firebaseConfig dosyanızı projenize uygun şekilde import edin
 import UploadImage from "./UploadImage";
+import DeleteImage from "./DeleteImage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 initializeApp(firebaseConfig);
@@ -20,6 +21,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/yukle" element={<UploadImage />} />
+        <Route path="/sil" element={<DeleteImage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
