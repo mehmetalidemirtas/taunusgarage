@@ -153,10 +153,10 @@ const Gallery = () => {
           <Box sx={{ marginTop: "10px" }}>
             <PhoneIcon
               sx={{
-                marginRight: "10px",
+                marginRight: "8px",
                 cursor: "pointer",
                 color: "#dedede",
-                fontSize: "40px",
+                fontSize: "35px",
               }}
               fontSize="50px"
               onClick={handlePhoneClick}
@@ -164,24 +164,28 @@ const Gallery = () => {
 
             <MapIcon
               sx={{
-                marginRight: "10px",
+                marginRight: "8px",
                 cursor: "pointer",
                 color: "#dedede",
-                fontSize: "40px",
+                fontSize: "35px",
               }}
               onClick={redirectToMap}
             />
             <FacebookIcon
               sx={{
                 cursor: "pointer",
-                marginRight: "10px",
+                marginRight: "8px",
                 color: "#dedede",
-                fontSize: "40px",
+                fontSize: "35px",
               }}
               onClick={redirectToFacebook}
             />
             <InstagramIcon
-              sx={{ cursor: "pointer", color: "#dedede", fontSize: "40px" }}
+              sx={{
+                cursor: "pointer",
+                color: "#dedede",
+                fontSize: "35px",
+              }}
               onClick={redirectToInstagram}
             />
           </Box>
