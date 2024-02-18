@@ -125,7 +125,13 @@ const Gallery = () => {
   };
 
   const redirectToFacebook = () => {
+    window.open("https://www.facebook.com/groups/1287813332059338", "_blank");
+  };
+  const redirectToInstagram = () => {
     window.open("https://www.instagram.com/demirci_garagge/", "_blank");
+  };
+  const redirectToMap = () => {
+    window.open("https://maps.app.goo.gl/Gdg66oqWxsYwfH9q9", "_blank");
   };
   const handlePhoneClick = () => {
     window.location.href = "tel:+905367611213";
@@ -163,7 +169,7 @@ const Gallery = () => {
                 color: "#dedede",
                 fontSize: "40px",
               }}
-              onClick={scrollToMap}
+              onClick={redirectToMap}
             />
             <FacebookIcon
               sx={{
@@ -176,7 +182,7 @@ const Gallery = () => {
             />
             <InstagramIcon
               sx={{ cursor: "pointer", color: "#dedede", fontSize: "40px" }}
-              onClick={redirectToFacebook}
+              onClick={redirectToInstagram}
             />
           </Box>
         </div>
