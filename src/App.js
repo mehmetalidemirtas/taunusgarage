@@ -21,7 +21,7 @@ import {
   getDownloadURL,
   listAll,
 } from "firebase/storage";
-
+import InstagramIcon from "@mui/icons-material/Instagram";
 const Gallery = () => {
   const [backgroundIndex, setBackgroundIndex] = useState(0);
   const [open, setOpen] = React.useState(true);
@@ -125,7 +125,7 @@ const Gallery = () => {
   };
 
   const redirectToFacebook = () => {
-    window.open("https://www.facebook.com/groups/1287813332059338", "_blank");
+    window.open("https://www.instagram.com/demirci_garagge/", "_blank");
   };
   const handlePhoneClick = () => {
     window.location.href = "tel:+905367611213";
@@ -166,6 +166,15 @@ const Gallery = () => {
               onClick={scrollToMap}
             />
             <FacebookIcon
+              sx={{
+                cursor: "pointer",
+                marginRight: "10px",
+                color: "#dedede",
+                fontSize: "40px",
+              }}
+              onClick={redirectToFacebook}
+            />
+            <InstagramIcon
               sx={{ cursor: "pointer", color: "#dedede", fontSize: "40px" }}
               onClick={redirectToFacebook}
             />
@@ -181,8 +190,7 @@ const Gallery = () => {
           <Typography>Mehmet Ali Demirci</Typography>
           <Typography>Telefon Numarası: +90 536 761 12 13</Typography>
           <Typography>
-            Çankaya, İstiklal Cd. Armoni İş Merkezi No:7 D:14, 33070
-            Akdeniz/Mersin (İçel)
+            Osmaniye Mahallesi, 81043. Sk. No:4/A, Toroslar/Mersin
           </Typography>
         </Box>
         <Box sx={{ padding: "15px", marginTop: "15px" }}>
@@ -221,7 +229,7 @@ const Gallery = () => {
       <Box sx={{ marginTop: "20px" }}>
         <div ref={mapRef}>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51106.42813553426!2d34.60336579943591!3d36.814883200825335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f30839c72255%3A0x9c5e42a4cfdee3d4!2sGarage%20Otomotiv!5e0!3m2!1str!2str!4v1707644929931!5m2!1str!2str"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199.64229725954024!2d34.61115175879984!3d36.81188754477042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f39b9fbebaeb%3A0x302ab86eded6f053!2sOsmaniye%2C%2081043.%20Sk.%20No%3A4%2C%2033220%20Toroslar%2FMersin!5e0!3m2!1str!2str!4v1708281745368!5m2!1str!2str"
             width="100%"
             height="450"
             allowFullScreen=""
